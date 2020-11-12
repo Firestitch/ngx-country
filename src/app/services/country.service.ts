@@ -22,6 +22,7 @@ export class FsCountry {
 
   private _countries$ = new BehaviorSubject<IFsCountry[]>(null);
 
+  private _loaded = new BehaviorSubject<boolean>(false);
 
   constructor(
     @Optional() @Inject(FS_COUNTRY_CONFIG) private readonly _countryConfig: IFsCountryConfig,
@@ -38,6 +39,14 @@ export class FsCountry {
 
   public get countries(): IFsCountry[] {
     return this._countries$.getValue();
+  }
+
+  public get loaded$(): Observable<boolean> {
+    return this._loaded.asObservable();
+  }
+
+  public get loaded(): boolean {
+    return this._loaded.getValue();
   }
 
   public countryByCode(code: string): IFsCountry {
@@ -59,6 +68,7 @@ export class FsCountry {
           .json()
           .then((data: IFsCountry[]) => {
             this._countries$.next(data);
+            this._loaded.next(true);
 
             this._processCountries();
           });
