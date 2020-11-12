@@ -2,7 +2,7 @@
   "extends": "./tools/config/tsconfig.cli.json",
   "compilerOptions": {
     "paths": {
-      "@firestitch/package": [
+      "@firestitch/country": [
         "src/public_api.ts"
       ],
       "@env": [

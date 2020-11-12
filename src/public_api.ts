@@ -1,7 +1,4 @@
-/*
- * Public API Surface of fs-menu
- */
+export { FsCountry } from './app/services/country.service';
 
-export { FsComponentModule } from './app/fs-component.module';
-
-export { FsComponentComponent } from './app/components/component/component.component';
+export { IFsCountryConfig } from './app/interfaces/country-config.interface';
+export { IFsCountry, IFsCountryRegion } from './app/interfaces/country.interface';
