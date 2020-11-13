@@ -4,7 +4,6 @@
     <th>Name</th>
     <th>Code</th>
     <th>Calling Code</th>
-    <th>Emoji</th>
   </tr>
   </thead>
   <tr *ngFor="let country of countryService.countries$ | async">
@@ -12,10 +11,9 @@
     <td style="text-align: center"> {{ country.code }}</td>
     <td style="text-align: center">
       <ng-container *ngIf="!!country.callingCode else noCode">
-        +{{ country.callingCode }}
+        {{ country.code | fsCountryCallingCode }}
       </ng-container>
       <ng-template #noCode> - </ng-template>
     </td>
-    <td style="text-align: center"> {{ country.emoji }}</td>
   </tr>
 </table>

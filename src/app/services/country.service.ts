@@ -1,10 +1,12 @@
 import { Inject, Injectable, Optional } from '@angular/core'
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { shareReplay } from 'rxjs/operators';
+import { shareReplay, switchMap } from 'rxjs/operators';
+import { fromFetch } from 'rxjs/fetch';
+
+import { delayedRetry } from '@firestitch/common';
 
 import { FS_COUNTRY_CONFIG } from '../providers/country-config';
-
 import { IFsCountryConfig } from '../interfaces/country-config.interface';
 import { IFsCountry } from '../interfaces/country.interface';
 
@@ -22,7 +24,7 @@ export class FsCountry {
 
   private _countries$ = new BehaviorSubject<IFsCountry[]>(null);
 
-  private _loaded = new BehaviorSubject<boolean>(false);
+  private _ready$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     @Optional() @Inject(FS_COUNTRY_CONFIG) private readonly _countryConfig: IFsCountryConfig,
@@ -41,12 +43,12 @@ export class FsCountry {
     return this._countries$.getValue();
   }
 
-  public get loaded$(): Observable<boolean> {
-    return this._loaded.asObservable();
+  public get ready$(): Observable<boolean> {
+    return this._ready$.asObservable();
   }
 
-  public get loaded(): boolean {
-    return this._loaded.getValue();
+  public get ready(): boolean {
+    return this._ready$.getValue();
   }
 
   public countryByCode(code: string): IFsCountry {
@@ -62,20 +64,22 @@ export class FsCountry {
   }
 
   private _loadCountries(): void {
-    fetch(this._countryConfig?.countriesPath || DEFAULT_LOAD_PATH)
-      .then((response) => {
-        response
-          .json()
-          .then((data: IFsCountry[]) => {
-            this._countries$.next(data);
-            this._loaded.next(true);
+    fromFetch(this._countryConfig?.countriesPath || DEFAULT_LOAD_PATH)
+      .pipe(
+        switchMap((response) => response.json()),
+        delayedRetry(2000, 3),
+      )
+      .subscribe({
+        next: (data: IFsCountry[]) => {
+          this._countries$.next(data);
+          this._ready$.next(true);
 
-            this._processCountries();
-          });
-      })
-      .catch((e) => {
-        throw new Error('Countries can not be loaded ' + e);
-      })
+          this._processCountries();
+        },
+        error: (e) => {
+          throw new Error('Countries list can not be loaded. ' + e);
+        }
+      });
   }
 
   private _processCountries(): void {

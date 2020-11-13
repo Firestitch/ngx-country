@@ -16,6 +16,7 @@ import {
 } from './components';
 import { AppComponent } from './app.component';
 import { KitchenSinkConfigureComponent } from './components/kitchen-sink-configure';
+import { FsCountryModule } from '@firestitch/country';
 
 const routes: Routes = [
   { path: '', component: ExamplesComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
     FsMessageModule.forRoot(),
     ToastrModule.forRoot({ preventDuplicates: true }),
     RouterModule.forRoot(routes),
+    FsCountryModule,
   ],
   declarations: [
     AppComponent,
