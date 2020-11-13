@@ -1,7 +1,7 @@
 import { Inject, Injectable, Optional } from '@angular/core'
 
 import { BehaviorSubject, Observable } from 'rxjs';
-import { shareReplay, switchMap } from 'rxjs/operators';
+import { shareReplay, switchMap, tap } from 'rxjs/operators';
 import { fromFetch } from 'rxjs/fetch';
 
 import { delayedRetry } from '@firestitch/common';
@@ -68,13 +68,15 @@ export class FsCountry {
       .pipe(
         switchMap((response) => response.json()),
         delayedRetry(2000, 3),
-      )
-      .subscribe({
-        next: (data: IFsCountry[]) => {
+        tap((data: IFsCountry[]) => {
           this._countries$.next(data);
-          this._ready$.next(true);
 
           this._processCountries();
+        }),
+      )
+      .subscribe({
+        next: () => {
+          this._ready$.next(true);
         },
         error: (e) => {
           throw new Error('Countries list can not be loaded. ' + e);
