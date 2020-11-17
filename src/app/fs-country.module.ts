@@ -1,18 +1,29 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { FS_COUNTRY_CONFIG } from './providers/country-config';
 import { IFsCountryConfig } from './interfaces/country-config.interface';
-import { FsCountryCallingCode } from './pipe/country-code.pipe';
+import { FsCountryFlagComponent } from './components/country-flag/country-flag.component';
+import { FsCountryPhoneCodeComponent } from './components/country-phone-code/country-phone-code.component';
+import { FsCountryCallingCodePipe } from './pipe/country-code.pipe';
+import { FsCountryComponent } from './components/country/country.component';
 
 
 @NgModule({
   imports: [
+    CommonModule,
   ],
   exports: [
-    FsCountryCallingCode,
+    FsCountryCallingCodePipe,
+    FsCountryFlagComponent,
+    FsCountryPhoneCodeComponent,
+    FsCountryComponent,
   ],
   declarations: [
-    FsCountryCallingCode,
+    FsCountryCallingCodePipe,
+    FsCountryFlagComponent,
+    FsCountryPhoneCodeComponent,
+    FsCountryComponent,
   ],
   providers: [
   ],

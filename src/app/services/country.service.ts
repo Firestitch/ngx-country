@@ -6,6 +6,8 @@ import { fromFetch } from 'rxjs/fetch';
 
 import { delayedRetry } from '@firestitch/common';
 
+import ifEmoji from 'if-emoji'
+
 import { FS_COUNTRY_CONFIG } from '../providers/country-config';
 import { IFsCountryConfig } from '../interfaces/country-config.interface';
 import { IFsCountry } from '../interfaces/country.interface';
@@ -24,12 +26,19 @@ export class FsCountry {
 
   private _countries$ = new BehaviorSubject<IFsCountry[]>(null);
 
+  private _emojiSupported = false;
+
   private _ready$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     @Optional() @Inject(FS_COUNTRY_CONFIG) private readonly _countryConfig: IFsCountryConfig,
   ) {
+    this._checkIfEmojiAvailable();
     this._loadCountries();
+  }
+
+  public get emojiSupported(): boolean {
+    return this._emojiSupported;
   }
 
   public get countries$(): Observable<IFsCountry[]> {
@@ -97,5 +106,9 @@ export class FsCountry {
         this._countriesByCallingCode.set(country.callingCode, [country]);
       }
     })
+  }
+
+  private _checkIfEmojiAvailable() {
+    this._emojiSupported = ifEmoji('🇺🇸');
   }
 }

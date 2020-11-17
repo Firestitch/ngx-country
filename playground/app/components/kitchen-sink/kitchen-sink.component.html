@@ -3,17 +3,26 @@
   <tr>
     <th>Name</th>
     <th>Code</th>
-    <th>Calling Code</th>
+    <th>Flag</th>
+    <th>Phone Code</th>
+    <th>Country</th>
   </tr>
   </thead>
   <tr *ngFor="let country of countryService.countries$ | async">
     <td style="width: 200px"> {{ country.name }}</td>
     <td style="text-align: center"> {{ country.code }}</td>
     <td style="text-align: center">
+      <fs-country-flag [code]="country.code"></fs-country-flag>
+    </td>
+    <td style="text-align: center">
       <ng-container *ngIf="!!country.callingCode else noCode">
-        {{ country.code | fsCountryCallingCode }}
+        <fs-country-phone-code [code]="country.code"></fs-country-phone-code>
       </ng-container>
       <ng-template #noCode> - </ng-template>
+    </td>
+
+    <td style="text-align: center">
+      <fs-country [code]="country.code"></fs-country>
     </td>
   </tr>
 </table>

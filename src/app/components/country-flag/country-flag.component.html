@@ -1,0 +1,7 @@
+<ng-container *ngIf="emojiSupported && countryService.ready">
+  {{ countryEmoji }}
+</ng-container>
+
+<ng-container *ngIf="!emojiSupported">
+  <img [src]="'/assets/' + countryISOCode + '.svg'" alt="" class="country-icon">
+</ng-container>

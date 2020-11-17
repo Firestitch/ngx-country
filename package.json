@@ -42,7 +42,7 @@
     "@angular/platform-browser-dynamic": "^10.2.3",
     "@angular/router": "^10.2.3",
     "@compodoc/compodoc": "^1.1.11",
-    "@firestitch/common": "^8.0.5",
+    "@firestitch/common": "^8.0.6",
     "@firestitch/drawer": "^9.0.1",
     "@firestitch/example": "^9.1.0",
     "@firestitch/iframe": "^8.0.0",
@@ -68,6 +68,8 @@
   },
   "peerDependencies": {},
   "dependencies": {
-    "tslib": "^2.0.0"
+    "country-flag-icons": "^1.2.7",
+    "tslib": "^2.0.0",
+    "if-emoji": "^0.1.0"
   }
 }

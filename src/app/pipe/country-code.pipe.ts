@@ -4,7 +4,7 @@ import { FsCountry } from '../services/country.service';
 
 
 @Pipe({ name: 'fsCountryCallingCode' })
-export class FsCountryCallingCode implements PipeTransform {
+export class FsCountryCallingCodePipe implements PipeTransform {
 
   constructor(private _countryService: FsCountry) {
 
