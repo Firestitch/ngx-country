@@ -10,19 +10,19 @@
   </thead>
   <tr *ngFor="let country of countryService.countries$ | async">
     <td style="width: 200px"> {{ country.name }}</td>
-    <td style="text-align: center"> {{ country.code }}</td>
+    <td style="text-align: center"> {{ country.isoCode }}</td>
     <td style="text-align: center">
-      <fs-country-flag [code]="country.code"></fs-country-flag>
+      <fs-country-flag [code]="country.isoCode"></fs-country-flag>
     </td>
     <td style="text-align: center">
-      <ng-container *ngIf="!!country.callingCode else noCode">
-        <fs-country-phone-code [code]="country.code"></fs-country-phone-code>
+      <ng-container *ngIf="!!country.countryCode else noCode">
+        <fs-country-phone-code [code]="country.isoCode"></fs-country-phone-code>
       </ng-container>
       <ng-template #noCode> - </ng-template>
     </td>
 
     <td style="text-align: center">
-      <fs-country [code]="country.code"></fs-country>
+      <fs-country [code]="country.isoCode"></fs-country>
     </td>
   </tr>
 </table>

@@ -96,14 +96,14 @@ export class FsCountry {
   private _processCountries(): void {
     this.countries.forEach((country) => {
       this._countriesByName.set(country.name, country);
-      this._countriesByCode.set(country.code, country);
+      this._countriesByCode.set(country.isoCode, country);
 
-      if (this._countriesByCallingCode.has(country.callingCode)) {
+      if (this._countriesByCallingCode.has(country.countryCode)) {
         this._countriesByCallingCode
-          .get(country.callingCode)
+          .get(country.countryCode)
           .push(country);
       } else {
-        this._countriesByCallingCode.set(country.callingCode, [country]);
+        this._countriesByCallingCode.set(country.countryCode, [country]);
       }
     })
   }

@@ -1,7 +1,7 @@
 export interface IFsCountry {
-  code: string;
+  isoCode: string;
   name: string;
-  callingCode?: string;
+  countryCode?: string;
   emoji?: string;
   regions?: IFsCountryRegion[];
 }

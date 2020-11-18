@@ -18,9 +18,9 @@ export class FsCountryCallingCodePipe implements PipeTransform {
     }
 
     if (includeEmoji) {
-      return `${country.emoji} +${country.callingCode}`;
+      return `${country.emoji} +${country.countryCode}`;
     } else {
-      return `+${country.callingCode}`;
+      return `+${country.countryCode}`;
     }
   }
 }
