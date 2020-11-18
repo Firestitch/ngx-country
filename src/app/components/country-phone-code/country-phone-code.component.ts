@@ -95,7 +95,7 @@ export class FsCountryPhoneCodeComponent implements OnInit, OnChanges, OnDestroy
       return;
     }
 
-    this._country = this.countryService.countryByCode(this._countryISOCode);
+    this._country = this.countryService.countryByISOCode(this._countryISOCode);
   }
 
   private _updateFlagPath(): void {

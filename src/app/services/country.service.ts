@@ -22,7 +22,7 @@ export class FsCountry {
 
   private _countriesByName = new Map<string, IFsCountry>();
   private _countriesByCode = new Map<string, IFsCountry>();
-  private _countriesByCallingCode = new Map<string, IFsCountry[]>();
+  private _countriesByCountryCode = new Map<string, IFsCountry[]>();
 
   private _countries$ = new BehaviorSubject<IFsCountry[]>(null);
 
@@ -60,7 +60,7 @@ export class FsCountry {
     return this._ready$.getValue();
   }
 
-  public countryByCode(code: string): IFsCountry {
+  public countryByISOCode(code: string): IFsCountry {
     return this._countriesByCode.get(code);
   }
 
@@ -68,8 +68,8 @@ export class FsCountry {
     return this._countriesByName.get(name);
   }
 
-  public countriesByCallingCode(code: string): IFsCountry[] {
-    return this._countriesByCallingCode.get(code);
+  public countriesByCountryCode(code: string): IFsCountry[] {
+    return this._countriesByCountryCode.get(code);
   }
 
   private _loadCountries(): void {
@@ -98,12 +98,12 @@ export class FsCountry {
       this._countriesByName.set(country.name, country);
       this._countriesByCode.set(country.isoCode, country);
 
-      if (this._countriesByCallingCode.has(country.countryCode)) {
-        this._countriesByCallingCode
+      if (this._countriesByCountryCode.has(country.countryCode)) {
+        this._countriesByCountryCode
           .get(country.countryCode)
           .push(country);
       } else {
-        this._countriesByCallingCode.set(country.countryCode, [country]);
+        this._countriesByCountryCode.set(country.countryCode, [country]);
       }
     })
   }

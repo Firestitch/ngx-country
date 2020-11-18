@@ -11,7 +11,7 @@ export class FsCountryCallingCodePipe implements PipeTransform {
   }
 
   public transform(code: string, includeEmoji = true): string {
-    const country = this._countryService.countryByCode(code);
+    const country = this._countryService.countryByISOCode(code);
 
     if (!country) {
       return '';
