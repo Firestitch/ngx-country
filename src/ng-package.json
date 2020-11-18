@@ -3,5 +3,9 @@
   "dest": "../package",
   "lib": {
     "entryFile": "public_api.ts"
-  }
+  },
+  "whitelistedNonPeerDependencies": [
+    "country-flag-icons",
+    "if-emoji"
+  ]
 }
