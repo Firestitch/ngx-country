@@ -1,3 +1,4 @@
 export interface IFsCountryConfig {
-  countriesPath: string
+  countriesPath: string;
+  flagsPath: string;
 }
