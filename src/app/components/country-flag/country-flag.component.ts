@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 
 import { Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { filter, take, takeUntil } from 'rxjs/operators';
 
 import { FsCountry } from '../../services/country.service';
 import { FS_COUNTRY_CONFIG } from '../../providers/country-config';
@@ -62,6 +62,9 @@ export class FsCountryFlagComponent implements OnInit, OnDestroy {
     if (this.countryService.emojiSupported) {
       this.countryService.ready$
         .pipe(
+          filter((value) => {
+            return value;
+          }),
           take(1),
           takeUntil(this._destroy$),
         )
