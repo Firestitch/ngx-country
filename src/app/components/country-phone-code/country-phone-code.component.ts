@@ -36,6 +36,9 @@ export class FsCountryPhoneCodeComponent implements OnInit, OnChanges, OnDestroy
   @Input()
   public icon = true;
 
+  @Input()
+  public text = true;
+
   private _country: IFsCountry;
   private _countryISOCode: string;
   private _countryFlagPath: string;
