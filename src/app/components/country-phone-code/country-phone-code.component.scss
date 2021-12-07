@@ -1,3 +1,10 @@
+:host {
+  display: inline-flex;
+}
+
 .country-icon {
+  position: relative;
+  top: 0;
   width: 16px;
+  height: 16px;
 }
