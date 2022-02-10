@@ -1,3 +1,8 @@
-.country-icon {
-  width: 16px;
+:host.show-name.show-icon {
+  flex-direction: row;
+  align-items: center;
+
+  .name {
+    margin-left: 3px;
+  }
 }

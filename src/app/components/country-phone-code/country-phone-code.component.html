@@ -1,14 +1,14 @@
 <ng-container *fsSkeleton="countryService.ready$ | async; pattern: [100]">
   <ng-container *ngIf="country">
     <ng-container *ngIf="emojiSupported else svgCountry">
-      <ng-container *ngIf="icon">{{ country.emoji }}</ng-container>
-      <ng-container *ngIf="text">+{{ country.countryCode }}</ng-container>
+      <ng-container *ngIf="showIcon">{{ country.emoji }}</ng-container>
+      <span class="code" *ngIf="showCode">+{{ country.countryCode }}</span>
     </ng-container>
 
     <ng-template #svgCountry>
       <ng-container *ngIf="country">
-        <img *ngIf="icon" [src]="countryFlagPath" [alt]="countryISOCode" class="country-icon">
-        <ng-container *ngIf="text">+{{ country.countryCode }}</ng-container>
+        <img *ngIf="showIcon" [src]="countryFlagPath" [alt]="countryISOCode" [style.width]="width + 'px'">
+        <span class="code" *ngIf="showCode">+{{ country.countryCode }}</span>
       </ng-container>
     </ng-template>
   </ng-container>

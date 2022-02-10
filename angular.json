@@ -22,7 +22,11 @@
             "assets": [
               "playground/favicon.ico",
               "playground/assets",
-              "playground/assets/countries.json",
+              {
+                "glob": "**/*",
+                "input": "./src/app/assets",
+                "output": "./assets"
+              },
               {
                 "glob": "**/*",
                 "input": "./node_modules/country-flag-icons/3x2/",

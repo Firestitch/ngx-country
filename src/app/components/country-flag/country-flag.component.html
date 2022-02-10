@@ -3,5 +3,5 @@
 </ng-container>
 
 <ng-container *ngIf="!emojiSupported">
-  <img [src]="countryFlagPath" alt="" class="country-icon">
+  <img [src]="countryFlagPath" alt="" [style.width]="width + 'px'">
 </ng-container>

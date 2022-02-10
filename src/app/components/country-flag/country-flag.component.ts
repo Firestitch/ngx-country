@@ -19,9 +19,6 @@ import { DEFAULT_FLAGS_PATH } from '../../consts/default-flag-path.const';
 @Component({
   selector: 'fs-country-flag',
   templateUrl: './country-flag.component.html',
-  styleUrls: [
-    './country-flag.component.scss',
-  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsCountryFlagComponent implements OnInit, OnDestroy {
@@ -32,6 +29,8 @@ export class FsCountryFlagComponent implements OnInit, OnDestroy {
     this._updateFlag();
     this._updateFlagPath();
   };
+
+  @Input() public width = 16;
 
   private _countryEmoji: string;
   private _countryISOCode: string;

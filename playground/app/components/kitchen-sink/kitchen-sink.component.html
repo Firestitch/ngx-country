@@ -4,8 +4,8 @@
     <th>Name</th>
     <th>Code</th>
     <th>Flag</th>
-    <th>Phone Code</th>
-    <th>Country</th>
+    <th align="left">Phone Code</th>
+    <th align="left">Country</th>
   </tr>
   </thead>
   <tr *ngFor="let country of countryService.countries$ | async">
@@ -14,14 +14,14 @@
     <td style="text-align: center">
       <fs-country-flag [code]="country.isoCode"></fs-country-flag>
     </td>
-    <td style="text-align: center">
+    <td>
       <ng-container *ngIf="!!country.countryCode else noCode">
         <fs-country-phone-code [code]="country.isoCode"></fs-country-phone-code>
       </ng-container>
       <ng-template #noCode> - </ng-template>
     </td>
 
-    <td style="text-align: center">
+    <td style="text-align: left">
       <fs-country [code]="country.isoCode"></fs-country>
     </td>
   </tr>
