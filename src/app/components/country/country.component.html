@@ -2,14 +2,18 @@
   <ng-container *ngIf="country">
     <ng-container *ngIf="emojiSupported else svgCountry">
       <ng-container *ngIf="showIcon">{{ country.emoji }}</ng-container> 
-      <span *ngIf="showName" class="name">{{ country.name }}</span>
+      <ng-container *ngTemplateOutlet="name"></ng-container>
     </ng-container>
 
     <ng-template #svgCountry>
       <ng-container *ngIf="country">
         <img *ngIf="showIcon" [src]="countryFlagPath" [alt]="countryISOCode" [style.width]="width + 'px'">
-        <span *ngIf="showName" class="name">{{ country.name }}</span>
+        <ng-container *ngTemplateOutlet="name"></ng-container>
       </ng-container>
     </ng-template>
   </ng-container>
 </ng-container>
+
+<ng-template #name>
+  <span *ngIf="showName" class="name">{{ country.name }}{{ region ? ', ' + region : '' }}</span>
+</ng-template>

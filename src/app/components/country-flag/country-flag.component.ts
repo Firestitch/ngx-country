@@ -81,10 +81,6 @@ export class FsCountryFlagComponent implements OnInit, OnDestroy {
   }
 
   private _updateFlag(): void {
-    if (!this.countryService.ready) {
-      return;
-    }
-
     this._countryEmoji = this.countryService.countryByISOCode(this._countryISOCode)?.emoji;
   }
 

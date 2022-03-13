@@ -1,6 +1,6 @@
 import { Inject, Injectable, Optional } from '@angular/core'
 
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import { shareReplay, switchMap, tap } from 'rxjs/operators';
 import { fromFetch } from 'rxjs/fetch';
 
@@ -28,7 +28,7 @@ export class FsCountry {
 
   private _emojiSupported = false;
 
-  private _ready$ = new BehaviorSubject<boolean>(false);
+  private _ready$ = new ReplaySubject<boolean>();
 
   constructor(
     @Optional() @Inject(FS_COUNTRY_CONFIG) private readonly _countryConfig: IFsCountryConfig,
@@ -56,10 +56,6 @@ export class FsCountry {
     return this._ready$.asObservable();
   }
 
-  public get ready(): boolean {
-    return this._ready$.getValue();
-  }
-
   public countryByISOCode(code: string): IFsCountry {
     return this._countriesByCode.get(code);
   }
@@ -77,14 +73,11 @@ export class FsCountry {
       .pipe(
         switchMap((response) => response.json()),
         delayedRetry(2000, 3),
-        tap((data: IFsCountry[]) => {
-          this._countries$.next(data);
-
-          this._processCountries();
-        }),
       )
       .subscribe({
-        next: () => {
+        next: (data: IFsCountry[]) => {
+          this._countries$.next(data);
+          this._processCountries();
           this._ready$.next(true);
         },
         error: (e) => {

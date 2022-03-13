@@ -41,6 +41,9 @@ export class FsCountryComponent implements OnInit, OnChanges, OnDestroy {
   public showName = true;
 
   @Input()
+  public region: string;
+  
+  @Input()
   public width = 16;
 
   private _country: IFsCountry;
@@ -98,10 +101,6 @@ export class FsCountryComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   private _updateFlag(): void {
-    if (!this.countryService.ready || !this._countryISOCode) {
-      return;
-    }
-
     this._country = this.countryService.countryByISOCode(this._countryISOCode);
   }
 
