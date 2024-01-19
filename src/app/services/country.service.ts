@@ -1,16 +1,17 @@
-import { Inject, Injectable, Optional } from '@angular/core'
-
-import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
-import { shareReplay, switchMap, tap } from 'rxjs/operators';
-import { fromFetch } from 'rxjs/fetch';
+import { Inject, Injectable, Optional } from '@angular/core';
 
 import { delayedRetry } from '@firestitch/common';
 
-import ifEmoji from 'if-emoji'
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { shareReplay, switchMap } from 'rxjs/operators';
 
-import { FS_COUNTRY_CONFIG } from '../providers/country-config';
+import { fromFetch } from 'rxjs/fetch';
+
+
+import { emojSupported } from '../helpers';
 import { IFsCountryConfig } from '../interfaces/country-config.interface';
 import { IFsCountry } from '../interfaces/country.interface';
+import { FS_COUNTRY_CONFIG } from '../providers/country-config';
 
 const DEFAULT_LOAD_PATH = '/assets/countries.json';
 
@@ -23,11 +24,8 @@ export class FsCountry {
   private _countriesByName = new Map<string, IFsCountry>();
   private _countriesByCode = new Map<string, IFsCountry>();
   private _countriesByCountryCode = new Map<string, IFsCountry[]>();
-
   private _countries$ = new BehaviorSubject<IFsCountry[]>(null);
-
   private _emojiSupported = false;
-
   private _ready$ = new ReplaySubject<boolean>();
 
   constructor(
@@ -81,8 +79,8 @@ export class FsCountry {
           this._ready$.next(true);
         },
         error: (e) => {
-          throw new Error('Countries list can not be loaded. ' + e);
-        }
+          throw new Error(`Countries list can not be loaded. ${  e}`);
+        },
       });
   }
 
@@ -98,10 +96,10 @@ export class FsCountry {
       } else {
         this._countriesByCountryCode.set(country.countryCode, [country]);
       }
-    })
+    });
   }
 
   private _checkIfEmojiAvailable() {
-    this._emojiSupported = ifEmoji('🇺🇸');
+    this._emojiSupported = emojSupported('🇺🇸');
   }
 }

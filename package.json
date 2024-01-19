@@ -2,7 +2,7 @@
   "name": "@firestitch/country",
   "title": "@firestitch/country",
   "description": "@firestitch/country",
-  "version": "12.0.0",
+  "version": "12.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Firestitch/ngx-country"
@@ -66,7 +66,6 @@
     "@firestitch/skeleton": ">=8.1.4"
   },
   "dependencies": {
-    "country-flag-icons": "^1.2.7",
-    "if-emoji": "^0.1.0"
+    "country-flag-icons": "^1.2.7"
   }
 }
