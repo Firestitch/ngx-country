@@ -13,7 +13,7 @@ import { IFsCountryConfig } from '../interfaces/country-config.interface';
 import { IFsCountry } from '../interfaces/country.interface';
 import { FS_COUNTRY_CONFIG } from '../providers/country-config';
 
-const DEFAULT_LOAD_PATH = '/assets/countries.json';
+const DEFAULT_LOAD_PATH = '/assets/country/countries.json';
 
 
 @Injectable({

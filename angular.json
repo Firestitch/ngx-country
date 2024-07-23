@@ -25,12 +25,7 @@
               {
                 "glob": "**/*",
                 "input": "./src/app/assets",
-                "output": "./assets"
-              },
-              {
-                "glob": "**/*",
-                "input": "./node_modules/country-flag-icons/3x2/",
-                "output": "./assets/country-flags/"
+                "output": "./assets/country"
               }
             ],
             "styles": [
@@ -144,8 +139,8 @@
           "options": {
             "tsConfig": "src/tsconfig.lib.json",
             "project": "src/ng-package.json"
-          }
-        ,          "configurations": {
+          },
+          "configurations": {
             "production": {
               "tsConfig": "src/tsconfig.lib.prod.json"
             }
