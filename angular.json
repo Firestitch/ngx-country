@@ -34,7 +34,12 @@
             "scripts": [],
             "allowedCommonJsDependencies": [
               "highlight.js"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/app/assets"
+              ]
+            }
           },
           "configurations": {
             "production": {
