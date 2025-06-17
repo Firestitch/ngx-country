@@ -13,13 +13,13 @@ import { IFsCountryConfig } from '../interfaces/country-config.interface';
 import { IFsCountry } from '../interfaces/country.interface';
 import { FS_COUNTRY_CONFIG } from '../providers/country-config';
 
-const DEFAULT_LOAD_PATH = '/assets/country/countries.json';
-
 
 @Injectable({
   providedIn: 'root',
 })
 export class FsCountry {
+
+  public defaultAssetPath = '/assets/country';
 
   private _countriesByName = new Map<string, IFsCountry>();
   private _countriesByCode = new Map<string, IFsCountry>();
@@ -66,8 +66,17 @@ export class FsCountry {
     return this._countriesByCountryCode.get(code);
   }
 
+  public getFlagUrl(code: string): string {
+    return `${this.assetPath}/flag-icons/${code}.svg`;
+  }
+
+  public get assetPath(): string {
+    return (this._countryConfig?.assetPath || this.defaultAssetPath)
+      .replace(/\/{2,}/g, '/');
+  }
+
   private _loadCountries(): void {
-    fromFetch(this._countryConfig?.countriesPath || DEFAULT_LOAD_PATH)
+    fromFetch(`${this.assetPath}/countries.json`)
       .pipe(
         switchMap((response) => response.json()),
         delayedRetry(2000, 3),

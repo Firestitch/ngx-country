@@ -1,3 +1,3 @@
 export interface IFsCountryConfig {
-  countriesPath?: string;
+  assetPath?: string;
 }

@@ -10,10 +10,9 @@ import {
 import { Subject } from 'rxjs';
 import { filter, take, takeUntil } from 'rxjs/operators';
 
-import { FsCountry } from '../../services/country.service';
-import { FS_COUNTRY_CONFIG } from '../../providers/country-config';
 import { IFsCountryConfig } from '../../interfaces/country-config.interface';
-import { DEFAULT_FLAGS_PATH } from '../../consts/default-flag-path.const';
+import { FS_COUNTRY_CONFIG } from '../../providers/country-config';
+import { FsCountry } from '../../services/country.service';
 
 
 @Component({
@@ -28,7 +27,7 @@ export class FsCountryFlagComponent implements OnInit, OnDestroy {
     this._countryISOCode = value?.trim().toUpperCase();
     this._updateFlag();
     this._updateFlagPath();
-  };
+  }
 
   @Input() public width = 16;
 
@@ -86,9 +85,7 @@ export class FsCountryFlagComponent implements OnInit, OnDestroy {
 
   private _updateFlagPath(): void {
     if (!this.emojiSupported) {
-      const path = this._config?.countriesPath || DEFAULT_FLAGS_PATH;
-
-      this._countryFlagPath = `${path}${this._countryISOCode}.svg`;
+      this._countryFlagPath = this.countryService.getFlagUrl(this._countryISOCode);
     }
   }
 }

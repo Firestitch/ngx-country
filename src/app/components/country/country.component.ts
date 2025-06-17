@@ -14,17 +14,17 @@ import {
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
-import { FsCountry } from '../../services/country.service';
+
+import { IFsCountryConfig } from '../../interfaces/country-config.interface';
 import { IFsCountry } from '../../interfaces/country.interface';
 import { FS_COUNTRY_CONFIG } from '../../providers/country-config';
-import { IFsCountryConfig } from '../../interfaces/country-config.interface';
-import { DEFAULT_FLAGS_PATH } from '../../consts/default-flag-path.const';
+import { FsCountry } from '../../services/country.service';
 
 
 @Component({
   selector: 'fs-country',
   templateUrl: './country.component.html',
-  styleUrls: [ './country.component.scss' ],
+  styleUrls: ['./country.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsCountryComponent implements OnInit, OnChanges, OnDestroy {
@@ -109,8 +109,6 @@ export class FsCountryComponent implements OnInit, OnChanges, OnDestroy {
       return;
     }
 
-    const path = this._config?.countriesPath || DEFAULT_FLAGS_PATH;
-
-    this._countryFlagPath = `${path}${this._countryISOCode}.svg`;
+    this._countryFlagPath = this.countryService.getFlagUrl(this._countryISOCode);
   }
 }

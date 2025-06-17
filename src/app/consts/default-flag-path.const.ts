@@ -1,1 +1,1 @@
-export const DEFAULT_FLAGS_PATH = '/assets/country/flag-icons/';
+export const DEFAULT_FLAG_ICON_PATH = '/assets/country/flag-icons/';
