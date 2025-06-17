@@ -72,7 +72,7 @@ export class FsCountry {
 
   public get assetPath(): string {
     return (this._countryConfig?.assetPath || this.defaultAssetPath)
-      .replace(/\/{2,}/g, '/');
+      .replace(/([^:]\/)\/+/g, '$1');
   }
 
   private _loadCountries(): void {
