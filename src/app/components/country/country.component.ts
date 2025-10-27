@@ -19,13 +19,21 @@ import { IFsCountryConfig } from '../../interfaces/country-config.interface';
 import { IFsCountry } from '../../interfaces/country.interface';
 import { FS_COUNTRY_CONFIG } from '../../providers/country-config';
 import { FsCountry } from '../../services/country.service';
+import { FsSkeletonModule } from '@firestitch/skeleton';
+import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
 
 
 @Component({
-  selector: 'fs-country',
-  templateUrl: './country.component.html',
-  styleUrls: ['./country.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-country',
+    templateUrl: './country.component.html',
+    styleUrls: ['./country.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
+    imports: [
+        FsSkeletonModule,
+        NgTemplateOutlet,
+        AsyncPipe,
+    ],
 })
 export class FsCountryComponent implements OnInit, OnChanges, OnDestroy {
 

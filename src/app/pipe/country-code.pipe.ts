@@ -3,7 +3,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { FsCountry } from '../services/country.service';
 
 
-@Pipe({ name: 'fsCountryCallingCode' })
+@Pipe({
+    name: 'fsCountryCallingCode',
+    standalone: true
+})
 export class FsCountryCallingCodePipe implements PipeTransform {
 
   constructor(private _countryService: FsCountry) {

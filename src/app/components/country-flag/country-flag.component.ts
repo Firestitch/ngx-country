@@ -16,9 +16,10 @@ import { FsCountry } from '../../services/country.service';
 
 
 @Component({
-  selector: 'fs-country-flag',
-  templateUrl: './country-flag.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'fs-country-flag',
+    templateUrl: './country-flag.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: true,
 })
 export class FsCountryFlagComponent implements OnInit, OnDestroy {
 

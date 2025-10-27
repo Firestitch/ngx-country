@@ -12,24 +12,21 @@ import { IFsCountryConfig } from './interfaces/country-config.interface';
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FsSkeletonModule,
-  ],
-  declarations: [
-    FsCountryCallingCodePipe,
-    FsCountryFlagComponent,
-    FsCountryPhoneCodeComponent,
-    FsCountryComponent,
-  ],
-  exports: [
-    FsCountryCallingCodePipe,
-    FsCountryFlagComponent,
-    FsCountryPhoneCodeComponent,
-    FsCountryComponent,
-  ],
-  providers: [
-  ],
+    imports: [
+        CommonModule,
+        FsSkeletonModule,
+        FsCountryCallingCodePipe,
+        FsCountryFlagComponent,
+        FsCountryPhoneCodeComponent,
+        FsCountryComponent,
+    ],
+    exports: [
+        FsCountryCallingCodePipe,
+        FsCountryFlagComponent,
+        FsCountryPhoneCodeComponent,
+        FsCountryComponent,
+    ],
+    providers: [],
 })
 export class FsCountryModule {
   static forRoot(config: IFsCountryConfig): ModuleWithProviders<FsCountryModule> {
