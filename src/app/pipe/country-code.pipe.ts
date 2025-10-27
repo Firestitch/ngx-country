@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform, inject } from '@angular/core';
 
 import { FsCountry } from '../services/country.service';
 
@@ -8,10 +8,8 @@ import { FsCountry } from '../services/country.service';
     standalone: true
 })
 export class FsCountryCallingCodePipe implements PipeTransform {
+  private _countryService = inject(FsCountry);
 
-  constructor(private _countryService: FsCountry) {
-
-  }
 
   public transform(code: string, includeEmoji = true): string {
     const country = this._countryService.countryByISOCode(code);

@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component, Inject,
-  Input,
-  OnDestroy,
-  OnInit, Optional,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, inject } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { filter, take, takeUntil } from 'rxjs/operators';
@@ -22,6 +15,10 @@ import { FsCountry } from '../../services/country.service';
     standalone: true,
 })
 export class FsCountryFlagComponent implements OnInit, OnDestroy {
+  countryService = inject(FsCountry);
+  private _cdRef = inject(ChangeDetectorRef);
+  private _config = inject<IFsCountryConfig>(FS_COUNTRY_CONFIG, { optional: true });
+
 
   @Input()
   public set code(value: string) {
@@ -37,13 +34,6 @@ export class FsCountryFlagComponent implements OnInit, OnDestroy {
   private _countryFlagPath: string;
 
   private _destroy$ = new Subject<void>();
-
-  constructor(
-    public countryService: FsCountry,
-    private _cdRef: ChangeDetectorRef,
-    @Optional() @Inject(FS_COUNTRY_CONFIG) private _config: IFsCountryConfig,
-  ) {
-  }
 
   public get emojiSupported(): boolean {
     return this.countryService.emojiSupported;

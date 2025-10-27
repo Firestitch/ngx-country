@@ -1,4 +1,4 @@
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { delayedRetry } from '@firestitch/common';
 
@@ -18,6 +18,8 @@ import { FS_COUNTRY_CONFIG } from '../providers/country-config';
   providedIn: 'root',
 })
 export class FsCountry {
+  private readonly _countryConfig = inject<IFsCountryConfig>(FS_COUNTRY_CONFIG, { optional: true });
+
 
   public defaultAssetPath = '/assets/country';
 
@@ -28,9 +30,7 @@ export class FsCountry {
   private _emojiSupported = false;
   private _ready$ = new ReplaySubject<boolean>();
 
-  constructor(
-    @Optional() @Inject(FS_COUNTRY_CONFIG) private readonly _countryConfig: IFsCountryConfig,
-  ) {
+  constructor() {
     this._checkIfEmojiAvailable();
     this._loadCountries();
   }

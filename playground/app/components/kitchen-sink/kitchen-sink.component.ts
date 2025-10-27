@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { KitchenSinkConfigureComponent } from '../kitchen-sink-configure';
 import { FsExampleComponent } from '@firestitch/example';
 import { FsMessage } from '@firestitch/message';
@@ -16,9 +16,8 @@ import { AsyncPipe } from '@angular/common';
     imports: [FsCountryComponent, FsCountryFlagComponent, FsCountryPhoneCodeComponent, AsyncPipe]
 })
 export class KitchenSinkComponent {
+  countryService = inject(FsCountry);
+
 
   public config = {};
-
-  constructor(public countryService: FsCountry) {
-  }
 }

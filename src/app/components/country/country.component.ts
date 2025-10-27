@@ -1,15 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  HostBinding,
-  Inject,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit, Optional,
-  SimpleChanges,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Input, OnChanges, OnDestroy, OnInit, SimpleChanges, inject } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
@@ -36,6 +25,10 @@ import { NgTemplateOutlet, AsyncPipe } from '@angular/common';
     ],
 })
 export class FsCountryComponent implements OnInit, OnChanges, OnDestroy {
+  countryService = inject(FsCountry);
+  private _cdRef = inject(ChangeDetectorRef);
+  private _config = inject<IFsCountryConfig>(FS_COUNTRY_CONFIG, { optional: true });
+
 
   @Input()
   public code: string;
@@ -58,12 +51,6 @@ export class FsCountryComponent implements OnInit, OnChanges, OnDestroy {
   private _countryISOCode: string;
   private _countryFlagPath: string;
   private _destroy$ = new Subject<void>();
-
-  constructor(
-    public countryService: FsCountry,
-    private _cdRef: ChangeDetectorRef,
-    @Optional() @Inject(FS_COUNTRY_CONFIG) private _config: IFsCountryConfig,
-  ) {}
 
   public get emojiSupported(): boolean {
     return this.countryService.emojiSupported;
