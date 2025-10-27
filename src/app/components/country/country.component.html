@@ -1,19 +1,23 @@
 <ng-container *fsSkeleton="countryService.ready$ | async; pattern: [100]">
-  <ng-container *ngIf="country">
-    <ng-container *ngIf="emojiSupported else svgCountry">
-      <ng-container *ngIf="showIcon">{{ country.emoji }}</ng-container> 
+  @if (country) {
+    @if (emojiSupported) {
+      @if (showIcon) {
+        {{ country.emoji }}
+      }
       <ng-container *ngTemplateOutlet="name"></ng-container>
-    </ng-container>
-
-    <ng-template #svgCountry>
-      <ng-container *ngIf="country">
-        <img *ngIf="showIcon" [src]="countryFlagPath" [alt]="countryISOCode" [style.width]="width + 'px'">
+    } @else {
+      @if (country) {
+        @if (showIcon) {
+          <img [src]="countryFlagPath" [alt]="countryISOCode" [style.width]="width + 'px'">
+        }
         <ng-container *ngTemplateOutlet="name"></ng-container>
-      </ng-container>
-    </ng-template>
-  </ng-container>
+      }
+    }
+  }
 </ng-container>
 
 <ng-template #name>
-  <span *ngIf="showName" class="name">{{ country.name }}{{ region ? ', ' + region : '' }}</span>
+  @if (showName) {
+    <span class="name">{{ country.name }}{{ region ? ', ' + region : '' }}</span>
+  }
 </ng-template>

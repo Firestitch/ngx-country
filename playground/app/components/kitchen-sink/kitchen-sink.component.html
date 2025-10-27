@@ -3,29 +3,31 @@
 
 <table class="table three-col-example">
   <thead>
-  <tr>
-    <th>Name</th>
-    <th>Code</th>
-    <th>Flag</th>
-    <th align="left">Phone Code</th>
-    <th align="left">Country</th>
-  </tr>
+    <tr>
+      <th>Name</th>
+      <th>Code</th>
+      <th>Flag</th>
+      <th align="left">Phone Code</th>
+      <th align="left">Country</th>
+    </tr>
   </thead>
-  <tr *ngFor="let country of countryService.countries$ | async">
-    <td style="width: 200px"> {{ country.name }}</td>
-    <td style="text-align: center"> {{ country.isoCode }}</td>
-    <td style="text-align: center">
-      <fs-country-flag [code]="country.isoCode"></fs-country-flag>
-    </td>
-    <td>
-      <ng-container *ngIf="!!country.countryCode else noCode">
-        <fs-country-phone-code [code]="country.isoCode"></fs-country-phone-code>
-      </ng-container>
-      <ng-template #noCode> - </ng-template>
-    </td>
-
-    <td style="text-align: left">
-      <fs-country [code]="country.isoCode"></fs-country>
-    </td>
-  </tr>
+  @for (country of countryService.countries$ | async; track country) {
+    <tr>
+      <td style="width: 200px"> {{ country.name }}</td>
+      <td style="text-align: center"> {{ country.isoCode }}</td>
+      <td style="text-align: center">
+        <fs-country-flag [code]="country.isoCode"></fs-country-flag>
+      </td>
+      <td>
+        @if (!!country.countryCode) {
+          <fs-country-phone-code [code]="country.isoCode"></fs-country-phone-code>
+        } @else {
+          -
+        }
+      </td>
+      <td style="text-align: left">
+        <fs-country [code]="country.isoCode"></fs-country>
+      </td>
+    </tr>
+  }
 </table>

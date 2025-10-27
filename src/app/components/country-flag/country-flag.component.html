@@ -1,7 +1,7 @@
-<ng-container *ngIf="emojiSupported && countryEmoji">
+@if (emojiSupported && countryEmoji) {
   {{ countryEmoji }}
-</ng-container>
+}
 
-<ng-container *ngIf="!emojiSupported">
+@if (!emojiSupported) {
   <img [src]="countryFlagPath" alt="" [style.width]="width + 'px'">
-</ng-container>
+}
