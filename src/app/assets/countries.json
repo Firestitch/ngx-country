@@ -906,6 +906,12 @@
     "emoji": "🇲🇳"
   },
   {
+    "isoCode": "ME",
+    "name": "Montenegro",
+    "countryCode": "382",
+    "emoji": "🇲🇪"
+  },
+  {
     "isoCode": "MS",
     "name": "Montserrat",
     "countryCode": "1",
@@ -1181,9 +1187,10 @@
     "emoji": "🇸🇳"
   },
   {
-    "isoCode": "CS",
-    "name": "Serbia and Montenegro",
-    "countryCode": ""
+    "isoCode": "RS",
+    "name": "Serbia",
+    "countryCode": "381",
+    "emoji": "🇷🇸"
   },
   {
     "isoCode": "SC",
